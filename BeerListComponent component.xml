@@ -1,0 +1,38 @@
+<aura:component >
+    <aura:attribute name="recordList" type="Object" />
+    <aura:attribute name="selectedBeerId" type="String" />
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <div class="slds-grid slds-wrap">
+        <aura:iteration items="{!v.recordList}" var="eachItem">
+            <div class="slds-col slds-size_1-of-4 slds-p-around_small">
+                <span>
+                    <lightning:card footer="{!eachItem.brewery_Name__c}" title="{!eachItem.Name}"
+                                    iconName="custom:custom7">
+                        <p class="slds-p-horizontal_small">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <img src="{!$Resource.BeerPic}" style="padding: 5px;width: 60px;height: 140px" /> 
+                                </div>
+                                <div class="slds-col slds-size_2-of-3">                                        
+                                    	Name: {!eachItem.Name}<br/>
+                                        Id: {!eachItem.Id__c}<br/>
+                                        Alcohol %: {!eachItem.Alcohol__c}
+                                </div>
+                            </div>
+                        </p>
+                        <aura:set attribute="actions" >
+                            <lightning:button name="{!eachItem.Id}" label="View Details" value="View Details"
+                                              variant="brand" onclick="{!c.showBeerDetail}" />
+                        </aura:set>
+                    </lightning:card>
+                </span>
+                
+            </div>
+        </aura:iteration>
+    </div>
+  <!--  <div class="slds-p-around_small">
+        <aura:if isTrue="{!v.selectedBeerId != Null}">
+            <c:BeerDetails BeerId="{!v.selectedBeerId}" />
+        </aura:if>
+    </div> -->
+</aura:component>
